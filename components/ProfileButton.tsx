@@ -1,14 +1,22 @@
-import { IconButton, Menu, MenuItem, Box } from '@mui/material';
+import { mdiAccount } from '@mdi/js';
+import { Icon } from '@mdi/react';
+import { Box, IconButton, Menu, MenuItem } from '@mui/material';
 import {
   bindMenu,
   bindTrigger,
   usePopupState,
 } from 'material-ui-popup-state/hooks';
-import { mdiAccount } from '@mdi/js';
-import { Icon } from '@mdi/react';
+import { useCallback } from 'react';
+import { logout } from 'store/auth';
 
 export default function ProfileButton() {
   const popupState = usePopupState({ variant: 'popover', popupId: 'demoMenu' });
+
+  const onLogout = useCallback(() => {
+    logout();
+    popupState.close();
+  }, [popupState]);
+
   return (
     <div>
       <IconButton
@@ -27,8 +35,7 @@ export default function ProfileButton() {
         />
       </IconButton>
       <Menu {...bindMenu(popupState)}>
-        <MenuItem onClick={popupState.close}>Cake</MenuItem>
-        <MenuItem onClick={popupState.close}>Death</MenuItem>
+        <MenuItem onClick={onLogout}>Logout</MenuItem>
       </Menu>
     </div>
   );

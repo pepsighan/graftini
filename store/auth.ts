@@ -2,6 +2,7 @@ import {
   GithubAuthProvider,
   onAuthStateChanged,
   signInWithPopup,
+  signOut,
   User,
 } from 'firebase/auth';
 import { useEffectOnce } from 'react-use';
@@ -54,4 +55,11 @@ export function useInitializeAuth() {
 export async function login() {
   const provider = new GithubAuthProvider();
   await signInWithPopup(firebaseAuth, provider);
+}
+
+/**
+ * Logs out the logged in user.
+ */
+export async function logout() {
+  await signOut(firebaseAuth);
 }
