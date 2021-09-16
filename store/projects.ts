@@ -8,7 +8,7 @@ import {
   Timestamp,
 } from 'firebase/firestore';
 import { useCallback } from 'react';
-import { useQuery, UseQueryResult } from 'react-query';
+import { useQuery, useQueryClient, UseQueryResult } from 'react-query';
 import { animals, colors, uniqueNamesGenerator } from 'unique-names-generator';
 import { Collection } from 'utils/collections';
 import { useAuth } from './auth';
@@ -53,6 +53,7 @@ export function useProjects(): UseQueryResult<Project[] | null, unknown> {
  * Create a new random project (at least for now).
  */
 export function useCreateProject() {
+  const queryClient = useQueryClient();
   const uid = useAuth(useCallback((state) => state.user?.uid, []));
 
   return useCallback(async () => {
@@ -71,5 +72,7 @@ export function useCreateProject() {
         updatedAt: serverTimestamp(),
       }
     );
-  }, [uid]);
+    // Refetch all the projects.
+    queryClient.invalidateQueries('my-projects');
+  }, [queryClient, uid]);
 }
