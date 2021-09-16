@@ -5,7 +5,7 @@ import SEO from 'components/SEO';
 export default function Projects() {
   return (
     <>
-      <SEO title="Projects" />
+      <SEO title="My Projects" />
       <Navigation />
 
       <Container sx={{ mt: 2 }}>
