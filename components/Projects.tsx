@@ -1,5 +1,5 @@
 import { LoadingButton } from '@mui/lab';
-import { Button, Container, Stack, Typography } from '@mui/material';
+import { Box, Button, Container, Stack, Typography } from '@mui/material';
 import Navigation from 'components/Navigation';
 import SEO from 'components/SEO';
 import { useCallback } from 'react';
@@ -28,9 +28,18 @@ export default function Projects() {
           </LoadingButton>
         </Stack>
 
-        {(data ?? []).map((it) => (
-          <Button key={it.id}>{it.name}</Button>
-        ))}
+        <Box sx={{ mt: 4 }}>
+          {(data ?? []).map((it) => (
+            <Button
+              key={it.id}
+              variant="outlined"
+              color="inherit"
+              sx={{ mr: 4, height: 200, width: 200 }}
+            >
+              {it.name}
+            </Button>
+          ))}
+        </Box>
       </Container>
     </>
   );
