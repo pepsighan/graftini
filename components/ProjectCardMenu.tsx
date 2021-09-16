@@ -6,6 +6,8 @@ import {
   bindTrigger,
   usePopupState,
 } from 'material-ui-popup-state/hooks';
+import { useCallback } from 'react';
+import { useDeleteProject } from 'store/projects';
 
 type ProjectCardMenuProps = {
   projectId: string;
@@ -16,6 +18,14 @@ export default function ProjectCardMenu({ projectId }: ProjectCardMenuProps) {
     variant: 'popover',
     popupId: `project-card-menu-${projectId}`,
   });
+
+  const { mutate: deleteProject } = useDeleteProject();
+  const onDelete = useCallback(() => {
+    deleteProject({
+      projectId,
+    });
+    popupState.close();
+  }, [deleteProject, popupState, projectId]);
 
   return (
     <div>
@@ -30,7 +40,7 @@ export default function ProjectCardMenu({ projectId }: ProjectCardMenuProps) {
         />
       </IconButton>
       <Menu {...bindMenu(popupState)}>
-        <MenuItem onClick={popupState.close}>Delete</MenuItem>
+        <MenuItem onClick={onDelete}>Delete</MenuItem>
       </Menu>
     </div>
   );
