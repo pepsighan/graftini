@@ -31,7 +31,7 @@ export default function Projects() {
 
         <Box sx={{ mt: 4 }}>
           {(data ?? []).map((it) => (
-            <Box key={it.id} sx={{ mr: 4, display: 'inline-block' }}>
+            <Box key={it.id} sx={{ mr: 4, mb: 4, display: 'inline-block' }}>
               <ProjectCard project={it} />
             </Box>
           ))}
