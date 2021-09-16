@@ -1,6 +1,8 @@
 import {
   addDoc,
   collection,
+  deleteDoc,
+  doc,
   getDocs,
   orderBy,
   query,
@@ -84,5 +86,40 @@ export function useCreateProject() {
       // Refetch all the projects.
       queryClient.invalidateQueries('my-projects');
     }, [queryClient, uid])
+  );
+}
+
+type UseDeleteProjectData = {
+  projectId: string;
+};
+
+/**
+ * Delete a project.
+ */
+export function useDeleteProject() {
+  const queryClient = useQueryClient();
+  const uid = useAuth(useCallback((state) => state.user?.uid, []));
+
+  return useMutation(
+    useCallback(
+      async (data: UseDeleteProjectData) => {
+        if (!uid) {
+          return;
+        }
+
+        await deleteDoc(
+          doc(
+            firestore,
+            Collection.Users,
+            uid,
+            Collection.Projects,
+            data.projectId
+          )
+        );
+        // Refetch all the projects.
+        queryClient.invalidateQueries('my-projects');
+      },
+      [queryClient, uid]
+    )
   );
 }

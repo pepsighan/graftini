@@ -1,4 +1,4 @@
-import { mdiAccount } from '@mdi/js';
+import { mdiDotsVertical } from '@mdi/js';
 import { Icon } from '@mdi/react';
 import { Box, IconButton, Menu, MenuItem } from '@mui/material';
 import {
@@ -6,31 +6,23 @@ import {
   bindTrigger,
   usePopupState,
 } from 'material-ui-popup-state/hooks';
-import { useCallback } from 'react';
-import { logout } from 'store/auth';
 
-export default function ProfileButton() {
+type ProjectCardMenuProps = {
+  projectId: string;
+};
+
+export default function ProjectCardMenu({ projectId }: ProjectCardMenuProps) {
   const popupState = usePopupState({
     variant: 'popover',
-    popupId: 'profile-menu',
+    popupId: `project-card-menu-${projectId}`,
   });
-
-  const onLogout = useCallback(() => {
-    logout();
-    popupState.close();
-  }, [popupState]);
 
   return (
     <div>
-      <IconButton
-        sx={{
-          backgroundColor: 'grey.100',
-        }}
-        {...bindTrigger(popupState)}
-      >
+      <IconButton {...bindTrigger(popupState)}>
         <Box
           component={Icon}
-          path={mdiAccount}
+          path={mdiDotsVertical}
           sx={{
             width: 16,
             height: 16,
@@ -38,7 +30,7 @@ export default function ProfileButton() {
         />
       </IconButton>
       <Menu {...bindMenu(popupState)}>
-        <MenuItem onClick={onLogout}>Logout</MenuItem>
+        <MenuItem onClick={popupState.close}>Delete</MenuItem>
       </Menu>
     </div>
   );

@@ -1,7 +1,6 @@
-import { Button, Box, IconButton } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { Project } from 'store/projects';
-import { Icon } from '@mdi/react';
-import { mdiDotsVertical } from '@mdi/js';
+import ProjectCardMenu from './ProjectCardMenu';
 
 type ProjectCardProps = {
   project: Project;
@@ -18,13 +17,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         {project.name}
       </Button>
 
-      <IconButton sx={{ position: 'absolute', top: 2, right: 2 }}>
-        <Box
-          component={Icon}
-          path={mdiDotsVertical}
-          sx={{ width: 16, height: 16 }}
-        />
-      </IconButton>
+      <Box sx={{ position: 'absolute', top: 2, right: 2 }}>
+        <ProjectCardMenu projectId={project.id} />
+      </Box>
     </Box>
   );
 }
