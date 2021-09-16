@@ -1,11 +1,14 @@
+import { LoadingButton } from '@mui/lab';
 import { Button, Container, Stack, Typography } from '@mui/material';
 import Navigation from 'components/Navigation';
 import SEO from 'components/SEO';
+import { useCallback } from 'react';
 import { useCreateProject, useProjects } from 'store/projects';
 
 export default function Projects() {
   const { data } = useProjects();
-  const createProject = useCreateProject();
+  const { mutate: createProject, isLoading } = useCreateProject();
+  const onNew = useCallback(() => createProject(), [createProject]);
 
   return (
     <>
@@ -15,9 +18,14 @@ export default function Projects() {
       <Container sx={{ mt: 3 }}>
         <Stack direction="row" alignItems="center">
           <Typography variant="h6">My Projects</Typography>
-          <Button variant="outlined" sx={{ ml: 2 }} onClick={createProject}>
+          <LoadingButton
+            variant="outlined"
+            sx={{ ml: 2 }}
+            onClick={onNew}
+            loading={isLoading}
+          >
             New
-          </Button>
+          </LoadingButton>
         </Stack>
 
         {(data ?? []).map((it) => (

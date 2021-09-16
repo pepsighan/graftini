@@ -8,7 +8,12 @@ import {
   Timestamp,
 } from 'firebase/firestore';
 import { useCallback } from 'react';
-import { useQuery, useQueryClient, UseQueryResult } from 'react-query';
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  UseQueryResult,
+} from 'react-query';
 import { animals, colors, uniqueNamesGenerator } from 'unique-names-generator';
 import { Collection } from 'utils/collections';
 import { useAuth } from './auth';
@@ -31,20 +36,23 @@ export function useProjects(): UseQueryResult<Project[] | null, unknown> {
 
   return useQuery(
     'my-projects',
-    () =>
-      getDocs(
-        query(
-          collection(firestore, Collection.Users, uid, Collection.Projects),
-          orderBy('name', 'asc')
-        )
-      ).then((result) =>
-        result.docs.map((it) => ({
-          id: it.id,
-          name: it.get('name'),
-          createdAt: it.get('createdAt'),
-          updatedAt: it.get('updatedAt'),
-        }))
-      ),
+    useCallback(
+      () =>
+        getDocs(
+          query(
+            collection(firestore, Collection.Users, uid, Collection.Projects),
+            orderBy('name', 'asc')
+          )
+        ).then((result) =>
+          result.docs.map((it) => ({
+            id: it.id,
+            name: it.get('name'),
+            createdAt: it.get('createdAt'),
+            updatedAt: it.get('updatedAt'),
+          }))
+        ),
+      [uid]
+    ),
     { enabled: Boolean(uid) }
   );
 }
@@ -56,23 +64,25 @@ export function useCreateProject() {
   const queryClient = useQueryClient();
   const uid = useAuth(useCallback((state) => state.user?.uid, []));
 
-  return useCallback(async () => {
-    if (!uid) {
-      return;
-    }
-
-    await addDoc(
-      collection(firestore, Collection.Users, uid, Collection.Projects),
-      {
-        name: uniqueNamesGenerator({
-          dictionaries: [colors, animals],
-          separator: '-',
-        }),
-        createdAt: serverTimestamp(),
-        updatedAt: serverTimestamp(),
+  return useMutation(
+    useCallback(async () => {
+      if (!uid) {
+        return;
       }
-    );
-    // Refetch all the projects.
-    queryClient.invalidateQueries('my-projects');
-  }, [queryClient, uid]);
+
+      await addDoc(
+        collection(firestore, Collection.Users, uid, Collection.Projects),
+        {
+          name: uniqueNamesGenerator({
+            dictionaries: [colors, animals],
+            separator: '-',
+          }),
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp(),
+        }
+      );
+      // Refetch all the projects.
+      queryClient.invalidateQueries('my-projects');
+    }, [queryClient, uid])
+  );
 }
