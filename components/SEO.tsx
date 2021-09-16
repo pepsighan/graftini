@@ -5,6 +5,7 @@ type SEOProps = {
   description?: string;
 };
 
+// TODO: Use next-seo for all purpose SEO solution.
 export default function SEO({ title, description }: SEOProps) {
   return (
     <Head>

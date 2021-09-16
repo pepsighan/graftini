@@ -1,11 +1,15 @@
-import Navigation from 'components/Navigation';
-import SEO from 'components/SEO';
+import Home from 'components/Home';
+import Projects from 'components/Projects';
+import { useCallback } from 'react';
+import { LoginStatus, useAuth } from 'store/auth';
 
-export default function Home() {
+export default function Index() {
+  const loginStatus = useAuth(useCallback((state) => state.loginStatus, []));
+
   return (
     <>
-      <SEO />
-      <Navigation />
+      {loginStatus === LoginStatus.No && <Home />}
+      {loginStatus === LoginStatus.Yes && <Projects />}
     </>
   );
 }
