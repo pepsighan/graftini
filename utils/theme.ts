@@ -112,5 +112,18 @@ export default createTheme({
         elevation: 1,
       },
     },
+    MuiList: {
+      styleOverrides: {
+        root: {
+          paddingTop: 4,
+          paddingBottom: 4,
+
+          '& .MuiMenuItem-root': {
+            paddingTop: 0,
+            paddingBottom: 0,
+          },
+        },
+      },
+    },
   },
 });
