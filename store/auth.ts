@@ -1,4 +1,9 @@
-import { onAuthStateChanged, User } from 'firebase/auth';
+import {
+  GithubAuthProvider,
+  onAuthStateChanged,
+  signInWithPopup,
+  User,
+} from 'firebase/auth';
 import { useEffectOnce } from 'react-use';
 import create from 'zustand';
 import { firebaseAuth } from './firebase';
@@ -41,4 +46,12 @@ export function useInitializeAuth() {
       });
     });
   });
+}
+
+/**
+ * Initiates login with github.
+ */
+export async function login() {
+  const provider = new GithubAuthProvider();
+  await signInWithPopup(firebaseAuth, provider);
 }
