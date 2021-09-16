@@ -1,9 +1,10 @@
 import { LoadingButton } from '@mui/lab';
-import { Box, Button, Container, Stack, Typography } from '@mui/material';
+import { Box, Container, Stack, Typography } from '@mui/material';
 import Navigation from 'components/Navigation';
 import SEO from 'components/SEO';
 import { useCallback } from 'react';
 import { useCreateProject, useProjects } from 'store/projects';
+import ProjectCard from './ProjectCard';
 
 export default function Projects() {
   const { data } = useProjects();
@@ -30,14 +31,9 @@ export default function Projects() {
 
         <Box sx={{ mt: 4 }}>
           {(data ?? []).map((it) => (
-            <Button
-              key={it.id}
-              variant="outlined"
-              color="inherit"
-              sx={{ mr: 4, height: 200, width: 200 }}
-            >
-              {it.name}
-            </Button>
+            <Box key={it.id} sx={{ mr: 4, display: 'inline-block' }}>
+              <ProjectCard project={it} />
+            </Box>
           ))}
         </Box>
       </Container>

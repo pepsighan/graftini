@@ -19,7 +19,7 @@ import { Collection } from 'utils/collections';
 import { useAuth } from './auth';
 import { firestore } from './firebase';
 
-type Project = {
+export type Project = {
   id: string;
   name: string;
   // The date may be null until the changes from local are not synced to the firestore
