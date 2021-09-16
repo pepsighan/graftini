@@ -107,5 +107,10 @@ export default createTheme({
         },
       },
     },
+    MuiMenu: {
+      defaultProps: {
+        elevation: 1,
+      },
+    },
   },
 });
