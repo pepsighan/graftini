@@ -1,5 +1,4 @@
 import { PaletteColor, Color, createTheme } from '@mui/material';
-import { grey } from '@mui/material/colors';
 
 // The colors are chosen from the AI generator at https://getparade.com.
 
@@ -34,11 +33,45 @@ const interfaceColor: Color = {
   A700: '#4c333b',
 };
 
+const headerFont = '"Baloo 2", "Roboto", "Helvetica", "Arial", sans-serif';
+const bodyFont = '"Rubik", "Roboto", "Helvetica", "Arial", sans-serif';
+
 export default createTheme({
   palette: {
     primary: primaryColor,
     secondary: secondaryColor,
     grey: interfaceColor,
+  },
+  typography: {
+    fontFamily: bodyFont,
+    h1: {
+      fontFamily: headerFont,
+      fontWeight: 600,
+    },
+    h2: {
+      fontFamily: headerFont,
+      fontWeight: 600,
+    },
+    h3: {
+      fontFamily: headerFont,
+      fontWeight: 600,
+    },
+    h4: {
+      fontFamily: headerFont,
+      fontWeight: 600,
+    },
+    h5: {
+      fontFamily: headerFont,
+      fontWeight: 600,
+    },
+    h6: {
+      fontFamily: headerFont,
+      fontWeight: 600,
+    },
+    fontWeightLight: 300,
+    fontWeightRegular: 400,
+    fontWeightMedium: 500,
+    fontWeightBold: 600,
   },
   components: {
     MuiAppBar: {
