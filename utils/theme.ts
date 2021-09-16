@@ -1,4 +1,5 @@
 import { PaletteColor, Color, createTheme } from '@mui/material';
+import { grey } from '@mui/material/colors';
 
 // The colors are chosen from the AI generator at https://getparade.com.
 
@@ -38,5 +39,25 @@ export default createTheme({
     primary: primaryColor,
     secondary: secondaryColor,
     grey: interfaceColor,
+  },
+  components: {
+    MuiAppBar: {
+      defaultProps: {
+        color: 'default',
+        elevation: 0,
+      },
+      styleOverrides: {
+        colorDefault: {
+          backgroundColor: interfaceColor[50],
+          borderBottom: '1px solid',
+          borderBottomColor: interfaceColor[200],
+        },
+      },
+    },
+    MuiToolbar: {
+      defaultProps: {
+        variant: 'dense',
+      },
+    },
   },
 });

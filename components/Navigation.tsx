@@ -4,12 +4,11 @@ import icon from 'assets/icon.png';
 
 export default function Navigation() {
   return (
-    <AppBar position="static" color="transparent">
-      <Toolbar>
+    <AppBar position="static">
+      <Toolbar sx={{ justifyContent: 'space-between' }}>
         <IconButton edge="start" color="inherit">
-          <Image src={icon} alt="Logo" width={32} height={32} />
+          <Image src={icon} alt="Logo" width={24} height={24} />
         </IconButton>
-        <Typography variant="h6">News</Typography>
         <Button color="inherit">Login</Button>
       </Toolbar>
     </AppBar>
