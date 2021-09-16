@@ -9,7 +9,9 @@ export default function Navigation() {
         <IconButton edge="start" color="inherit">
           <Image src={icon} alt="Logo" width={24} height={24} />
         </IconButton>
-        <Button color="inherit">Login</Button>
+        <Button color="secondary" variant="contained">
+          Sign In with GitHub
+        </Button>
       </Toolbar>
     </AppBar>
   );
