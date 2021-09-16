@@ -92,5 +92,17 @@ export default createTheme({
         variant: 'dense',
       },
     },
+    MuiButtonBase: {
+      defaultProps: {
+        disableRipple: true,
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'initial',
+        },
+      },
+    },
   },
 });
