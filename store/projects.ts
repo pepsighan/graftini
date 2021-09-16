@@ -29,20 +29,23 @@ type Project = {
 export function useProjects(): UseQueryResult<Project[] | null, unknown> {
   const uid = useAuth(useCallback((state) => state.user?.uid, []));
 
-  return useQuery('my-projects', () =>
-    getDocs(
-      query(
-        collection(firestore, Collection.Users, uid, Collection.Projects),
-        orderBy('name', 'asc')
-      )
-    ).then((result) =>
-      result.docs.map((it) => ({
-        id: it.id,
-        name: it.get('name'),
-        createdAt: it.get('createdAt'),
-        updatedAt: it.get('updatedAt'),
-      }))
-    )
+  return useQuery(
+    'my-projects',
+    () =>
+      getDocs(
+        query(
+          collection(firestore, Collection.Users, uid, Collection.Projects),
+          orderBy('name', 'asc')
+        )
+      ).then((result) =>
+        result.docs.map((it) => ({
+          id: it.id,
+          name: it.get('name'),
+          createdAt: it.get('createdAt'),
+          updatedAt: it.get('updatedAt'),
+        }))
+      ),
+    { enabled: Boolean(uid) }
   );
 }
 
@@ -53,6 +56,10 @@ export function useCreateProject() {
   const uid = useAuth(useCallback((state) => state.user?.uid, []));
 
   return useCallback(async () => {
+    if (!uid) {
+      return;
+    }
+
     await addDoc(
       collection(firestore, Collection.Users, uid, Collection.Projects),
       {
