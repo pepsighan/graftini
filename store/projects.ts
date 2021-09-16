@@ -3,6 +3,7 @@ import {
   collection,
   deleteDoc,
   doc,
+  getDoc,
   getDocs,
   orderBy,
   query,
@@ -54,6 +55,32 @@ export function useProjects(): UseQueryResult<Project[] | null, unknown> {
           }))
         ),
       [uid]
+    ),
+    { enabled: Boolean(uid) }
+  );
+}
+
+/**
+ * Get the projecy by the id.
+ */
+export function useProject(
+  projectId: string
+): UseQueryResult<Project | null, unknown> {
+  const uid = useAuth(useCallback((state) => state.user?.uid, []));
+
+  return useQuery(
+    `my-project-${projectId}`,
+    useCallback(
+      () =>
+        getDoc(
+          doc(firestore, Collection.Users, uid, Collection.Projects, projectId)
+        ).then((result) => ({
+          id: result.id,
+          name: result.get('name'),
+          createdAt: result.get('createdAt'),
+          updatedAt: result.get('updatedAt'),
+        })),
+      [projectId, uid]
     ),
     { enabled: Boolean(uid) }
   );
