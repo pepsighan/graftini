@@ -1,4 +1,4 @@
-import { Canvas, Editor, Frame } from '@craftjs/core';
+import { Editor, Element, Frame } from '@craftjs/core';
 import Root from 'components/prebuilt/Root';
 import Title from 'components/prebuilt/Title';
 import LeftSidebar from './LeftSidebar';
@@ -8,9 +8,9 @@ export default function Designer() {
     <Editor resolver={{ Title, Container: Root }}>
       <LeftSidebar />
       <Frame>
-        <Canvas is={Root}>
-          <Title />
-        </Canvas>
+        <Element is={Root} canvas>
+          <Element is={Title} />
+        </Element>
       </Frame>
     </Editor>
   );
