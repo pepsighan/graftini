@@ -21,7 +21,9 @@ export default function WidgetButton({
         (ref) => create(ref, <Element is={component} />),
         [component, create]
       )}
-      sx={{ height: 150 }}
+      variant="outlined"
+      color="inherit"
+      sx={{ height: 150, borderColor: 'grey.300' }}
     >
       {children}
     </Button>
