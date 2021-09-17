@@ -13,7 +13,7 @@ export default function Title() {
         (ref: HTMLElement) => connect(drag(ref)),
         [connect, drag]
       )}
-      variant="h1"
+      variant="h5"
     >
       Ullamco proident eiusmod do duis
     </Typography>
