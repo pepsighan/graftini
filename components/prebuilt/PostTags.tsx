@@ -1,9 +1,9 @@
 import { useNode } from '@craftjs/core';
-import { Button, Stack } from '@mui/material';
+import { Chip, Stack } from '@mui/material';
 import Outline from 'components/designer/Outline';
 import { useCallback } from 'react';
 
-export default function Menu() {
+export default function PostTags() {
   const {
     connectors: { connect, drag },
     selected,
@@ -27,11 +27,11 @@ export default function Menu() {
       direction="row"
       sx={{ position: 'relative' }}
     >
-      <Button sx={{ mr: 2 }}>Menu 1</Button>
-      <Button sx={{ mr: 2 }}>Menu 2</Button>
-      <Button sx={{ mr: 2 }}>Menu 3</Button>
-      <Button sx={{ mr: 2 }}>Menu 4</Button>
-      <Button>Menu 5</Button>
+      <Chip sx={{ mr: 2 }} label="Tag 1" />
+      <Chip sx={{ mr: 2 }} label="Tag 2" />
+      <Chip sx={{ mr: 2 }} label="Tag 3" />
+      <Chip sx={{ mr: 2 }} label="Tag 4" />
+      <Chip label="Tag 5" />
 
       {(selected || hovered) && (
         <Outline hovered={selected ? false : hovered} />
