@@ -1,6 +1,7 @@
 import { Editor, Element, Frame } from '@craftjs/core';
 import { Box } from '@mui/material';
 import Menu from 'components/prebuilt/Menu';
+import PostAuthor from 'components/prebuilt/PostAuthor';
 import PostCategories from 'components/prebuilt/PostCategories';
 import PostContent from 'components/prebuilt/PostContent';
 import PostTags from 'components/prebuilt/PostTags';
@@ -18,6 +19,7 @@ export default function Designer() {
         PostContent,
         PostTags,
         PostCategories,
+        PostAuthor,
       }}
     >
       <LeftSidebar />
