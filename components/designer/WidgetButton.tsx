@@ -1,9 +1,16 @@
-import { useEditor, Element } from '@craftjs/core';
-import { Box, Button } from '@mui/material';
-import PostTitle from 'components/prebuilt/PostTitle';
-import { useCallback } from 'react';
+import { Element, useEditor } from '@craftjs/core';
+import { Button } from '@mui/material';
+import { ComponentType, ReactNode, useCallback } from 'react';
 
-export default function WidgetButton() {
+type WidgetButtonProps = {
+  component: ComponentType;
+  children: ReactNode;
+};
+
+export default function WidgetButton({
+  component,
+  children,
+}: WidgetButtonProps) {
   const {
     connectors: { create },
   } = useEditor();
@@ -11,12 +18,12 @@ export default function WidgetButton() {
   return (
     <Button
       ref={useCallback(
-        (ref) => create(ref, <Element is={PostTitle} />),
-        [create]
+        (ref) => create(ref, <Element is={component} />),
+        [component, create]
       )}
       sx={{ height: 150 }}
     >
-      <Box sx={{ width: 100, height: 100, border: '1px solid' }} />
+      {children}
     </Button>
   );
 }
