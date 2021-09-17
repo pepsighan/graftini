@@ -1,4 +1,5 @@
 import { Drawer, Stack, TextField, Toolbar } from '@mui/material';
+import Menu from 'components/prebuilt/Menu';
 import PostContent from 'components/prebuilt/PostContent';
 import PostTitle from 'components/prebuilt/PostTitle';
 import WidgetButton from './WidgetButton';
@@ -26,6 +27,7 @@ export default function LeftSidebar() {
       <Stack spacing={2} sx={{ mt: 2, mx: 2 }}>
         <WidgetButton component={PostTitle}>Post Title</WidgetButton>
         <WidgetButton component={PostContent}>Post Content</WidgetButton>
+        <WidgetButton component={Menu}>Menu</WidgetButton>
       </Stack>
     </Drawer>
   );

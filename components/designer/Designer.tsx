@@ -2,11 +2,13 @@ import { Editor, Element, Frame } from '@craftjs/core';
 import { Box } from '@mui/material';
 import Root from 'components/prebuilt/Root';
 import PostTitle from 'components/prebuilt/PostTitle';
+import PostContent from 'components/prebuilt/PostContent';
+import Menu from 'components/prebuilt/Menu';
 import LeftSidebar, { leftSidebarWidth } from './LeftSidebar';
 
 export default function Designer() {
   return (
-    <Editor resolver={{ Title: PostTitle, Container: Root }}>
+    <Editor resolver={{ PostTitle, Root, PostContent, Menu }}>
       <LeftSidebar />
       <Box
         sx={{
