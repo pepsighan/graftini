@@ -3,7 +3,7 @@ import { useNode } from '@craftjs/core';
 import { useCallback } from 'react';
 import Outline from 'components/designer/Outline';
 
-export default function Title() {
+export default function PostTitle() {
   const {
     connectors: { connect, drag },
     selected,
