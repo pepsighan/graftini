@@ -1,5 +1,6 @@
 import { Drawer, Stack, TextField, Toolbar } from '@mui/material';
 import Menu from 'components/prebuilt/Menu';
+import PostCategories from 'components/prebuilt/PostCategories';
 import PostContent from 'components/prebuilt/PostContent';
 import PostTags from 'components/prebuilt/PostTags';
 import PostTitle from 'components/prebuilt/PostTitle';
@@ -29,6 +30,7 @@ export default function LeftSidebar() {
         <WidgetButton component={PostTitle}>Post Title</WidgetButton>
         <WidgetButton component={PostContent}>Post Content</WidgetButton>
         <WidgetButton component={Menu}>Menu</WidgetButton>
+        <WidgetButton component={PostCategories}>Post Categories</WidgetButton>
         <WidgetButton component={PostTags}>Post Tags</WidgetButton>
       </Stack>
     </Drawer>

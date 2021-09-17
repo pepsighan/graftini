@@ -1,6 +1,7 @@
 import { Editor, Element, Frame } from '@craftjs/core';
 import { Box } from '@mui/material';
 import Menu from 'components/prebuilt/Menu';
+import PostCategories from 'components/prebuilt/PostCategories';
 import PostContent from 'components/prebuilt/PostContent';
 import PostTags from 'components/prebuilt/PostTags';
 import PostTitle from 'components/prebuilt/PostTitle';
@@ -9,7 +10,16 @@ import LeftSidebar, { leftSidebarWidth } from './LeftSidebar';
 
 export default function Designer() {
   return (
-    <Editor resolver={{ PostTitle, Root, PostContent, Menu, PostTags }}>
+    <Editor
+      resolver={{
+        Root,
+        Menu,
+        PostTitle,
+        PostContent,
+        PostTags,
+        PostCategories,
+      }}
+    >
       <LeftSidebar />
       <Box
         sx={{
