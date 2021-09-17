@@ -1,3 +1,4 @@
+import Designer from 'components/designer/Designer';
 import Navigation from 'components/Navigation';
 import SEO from 'components/SEO';
 import { useRouter } from 'next/router';
@@ -12,6 +13,7 @@ export default function Project() {
     <>
       <SEO title={data?.name ?? 'Project'} />
       <Navigation />
+      <Designer />
     </>
   );
 }
