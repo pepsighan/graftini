@@ -10,7 +10,10 @@ export default function Navigation() {
   const loginStatus = useAuth(useCallback((state) => state.loginStatus, []));
 
   return (
-    <AppBar position="static">
+    <AppBar
+      position="sticky"
+      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+    >
       <Toolbar sx={{ justifyContent: 'space-between' }}>
         <Link href="/" passHref>
           <IconButton component="a" edge="start" color="inherit">
