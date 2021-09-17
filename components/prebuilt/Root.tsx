@@ -18,7 +18,10 @@ export default function Root({ children }: RootProps) {
         (ref: HTMLElement) => connect(drag(ref)),
         [connect, drag]
       )}
-      sx={{ marginLeft: `${leftSidebarWidth}px` }}
+      sx={{
+        marginLeft: `${leftSidebarWidth}px`,
+        userSelect: 'none',
+      }}
     >
       {children}
     </Box>
