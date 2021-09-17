@@ -125,5 +125,10 @@ export default createTheme({
         },
       },
     },
+    MuiTextField: {
+      defaultProps: {
+        size: 'small',
+      },
+    },
   },
 });
