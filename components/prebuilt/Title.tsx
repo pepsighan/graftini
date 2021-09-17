@@ -6,10 +6,14 @@ import Outline from 'components/designer/Outline';
 export default function Title() {
   const {
     connectors: { connect, drag },
-    focus,
+    selected,
+    hovered,
   } = useNode(
     useCallback(
-      (state) => ({ focus: state.events.hovered || state.events.selected }),
+      (state) => ({
+        hovered: state.events.hovered,
+        selected: state.events.selected,
+      }),
       []
     )
   );
@@ -24,7 +28,9 @@ export default function Title() {
       sx={{ position: 'relative' }}
     >
       Ullamco proident eiusmod do duis
-      {focus && <Outline />}
+      {(selected || hovered) && (
+        <Outline hovered={selected ? false : hovered} />
+      )}
     </Typography>
   );
 }
